@@ -1,0 +1,62 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>PDF Output</title>
+    <style>
+        @page{
+            size:'A4';
+            margin: 2.5cm 1.5cm 3.5cm 1.5cm;
+
+            @top-center{
+                content: 'COMPANY NAME';
+            }
+
+            @bottom-right{
+                content: "Page " counter(page) " of " counter(pages);
+            }
+        }
+    </style>
+</head>
+<body>
+
+<h2>Expense List</h2>
+
+<div class="table">
+    <thead class="thead">
+        <tr>
+            <th>No</th>
+            <th>Amount</th>
+            <th>Description</th>
+            <th>Category</th>
+            <th>Date</th>
+        </tr>
+    </thead>
+
+    <tbody>
+        {% for expense in expenses %}
+        <tr>
+            <td>{{ forloop.counter }}</td>
+            <td>{{ expense.amount }}</td>
+            <td>{{ expense.description }</td>
+            <td>{{ expense.category }</td>
+            <td>{{ expense.date }</td>
+        </tr>
+        {% endfor %}
+
+        <tr>
+            <td>Total</td>
+            <td>{{ total }}</td>
+
+        </tr>
+
+    </tbody>
+
+
+</div>
+
+</body>
+</html>

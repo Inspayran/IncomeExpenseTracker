@@ -1,0 +1,30 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% include 'parts/sidebar.html' %}
+
+{% block content %}
+<div class="container mt-5">
+    {% include 'parts/messages.html'%}
+    <form action="{% url 'preferences' %}" method="post">
+        {% csrf_token %}
+    <div class="input-group">
+        <select class="form-select col-11" name="currency">
+            {%  if user_preferences.currency != None %}
+                <option selected>{{ user_preferences.currency }}</option>
+            {% else %}
+                <option selected>Choose...</option>
+            {% endif %}
+            {% for currency in currency_data %}
+            <option value="{{ currency.name }} - {{ currency.value  }}" name="currency">{{ currency.name }} - {{ currency.value  }}</option>
+            {% endfor %}
+
+        </select>
+        <input class="btn btn-outline-secondary col-1" type="submit" value="Save">
+    </div>
+    </form>
+</div>
+<hr>
+
+
+{% endblock %}
